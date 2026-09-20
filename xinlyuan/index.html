@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="新绿苑社区官网 - 提供物业服务、社区公告、周边生活指南及便民服务信息，打造温馨和谐的智慧社区生活空间。">
+    <meta name="keywords" content="新绿苑, 社区物业, 业主论坛, 社区公告, 便民服务, 智慧社区">
+    <title>新绿苑 - 社区物业服务与便民生活服务平台</title>
+    <script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+    <style>
+        :root {
+            --primary-color: #2e7d32;
+            --primary-light: #4caf50;
+            --primary-dark: #1b5e20;
+            --accent-color: #ff6f00;
+            --text-main: #333333;
+            --text-secondary: #666666;
+            --bg-body: #f4f6f8;
+            --bg-card: #ffffff;
+            --border-radius: 8px;
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+            --container-width: 1200px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.3s;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--bg-card);
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 20px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            font-weight: 500;
+            color: var(--text-main);
+            position: relative;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary-color);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: width 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+        }
+
+        .btn-outline {
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: var(--container-width);
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 15px;
+            font-weight: 800;
+        }
+
+        .hero p {
+            font-size: 18px;
+            opacity: 0.9;
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-search {
+            max-width: 500px;
+            margin: 0 auto;
+            display: flex;
+            background: white;
+            border-radius: 30px;
+            padding: 5px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+
+        .hero-search input {
+            flex: 1;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .hero-search button {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        /* Main Layout */
+        .main-container {
+            max-width: var(--container-width);
+            margin: 30px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+        }
+
+        /* Section Styles */
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            padding-left: 10px;
+            border-left: 4px solid var(--primary-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .section-more {
+            font-size: 14px;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        .section-more:hover {
+            color: var(--primary-color);
+        }
+
+        /* Service Cards */
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .service-card {
+            background: var(--bg-card);
+            padding: 25px 20px;
+            border-radius: var(--border-radius);
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .service-icon {
+            width: 50px;
+            height: 50px;
+            margin: 0 auto 15px;
+            background-color: #e8f5e9;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            font-size: 24px;
+        }
+
+        .service-card h3 {
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        .service-card p {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        /* News List */
+        .news-list {
+            background: var(--bg-card);
+            border-radius: var(--border-radius);
+            padding: 25px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .news-item {
+            display: flex;
+            gap: 15px;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .news-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .news-date {
+            background-color: #f1f8e9;
+            color: var(--primary-dark);
+            padding: 8px;
+            border-radius: 8px;
+            text-align: center;
+            min-width: 60px;
+        }
+
+        .news-date .day {
+            display: block;
+            font-size: 20px;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .news-date .month {
+            font-size: 12px;
+        }
+
+        .news-content h4 {
+            font-size: 16px;
+            margin-bottom: 5px;
+            line-height: 1.4;
+        }
+
+        .news-content h4:hover {
+            color: var(--primary-color);
+        }
+
+        .news-content p {
+            font-size: 13px;
+            color: var(--text-secondary);
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .widget {
+            background: var(--bg-card);
+            border-radius: var(--border-radius);
+            padding: 25px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .contact-list li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .contact-icon {
+            color: var(--primary-color);
+            font-size: 18px;
+        }
+
+        /* Notice Board */
+        .notice-board {
+            background-color: #fff8e1;
+            border-left: 4px solid var(--accent-color);
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+
+        .notice-board h4 {
+            color: #e65100;
+            margin-bottom: 10px;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .notice-board ul li {
+            font-size: 13px;
+            margin-bottom: 6px;
+            padding-left: 15px;
+            position: relative;
+        }
+
+        .notice-board ul li::before {
+            content: '•';
+            color: var(--accent-color);
+            position: absolute;
+            left: 0;
+        }
+
+        /* Gallery */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .gallery-item {
+            aspect-ratio: 1;
+            background-color: #ddd;
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #263238;
+            color: #cfd8dc;
+            padding: 60px 0 20px;
+            margin-top: 60px;
+        }
+
+        .footer-grid {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h4 {
+            color: white;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .footer-col p {
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-light);
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+            font-size: 13px;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 0 15px;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            nav {
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: white;
+                box-shadow: var(--shadow-md);
+                padding: 20px;
+                display: none;
+            }
+
+            nav.active {
+                display: block;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-search {
+                flex-direction: column;
+            }
+            .hero-search button {
+                width: 100%;
+                border-radius: 20px;
+            }
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-container">
+        <a href="#" class="logo">
+            <div class="logo-icon">新</div>
+            新绿苑
+        </a>
+        <div class="menu-toggle" id="mobile-menu-btn">☰</div>
+        <nav id="main-nav">
+            <ul>
+                <li><a href="#" class="active">首页</a></li>
+                <li><a href="#services">物业服务</a></li>
+                <li><a href="#news">社区公告</a></li>
+                <li><a href="#gallery">社区风采</a></li>
+                <li><a href="#contact">联系我们</a></li>
+            </ul>
+        </nav>
+        <div class="header-actions">
+            <button class="btn btn-outline" onclick="openLogin()">业主登录</button>
+            <button class="btn btn-primary" onclick="openReport()">报事报修</button>
+        </div>
+    </div>
+</header>
+
+<div class="hero">
+    <div class="hero-content">
+        <h1>新绿苑社区</h1>
+        <p>打造绿色生态、智慧便捷、邻里和谐的现代化居住社区。为您提供全方位的物业服务与便民生活指南。</p>
+        <div class="hero-search">
+            <input type="text" placeholder="搜索公告、服务、业主论坛...">
+            <button>搜索</button>
+        </div>
+    </div>
+</div>
+
+<main class="main-container">
+    <!-- Left Content -->
+    <div class="content-area">
+        
+        <!-- Services Section -->
+        <section id="services">
+            <div class="section-title">
+                <span>便民服务</span>
+                <a href="#" class="section-more">查看全部服务 &gt;</a>
+            </div>
+            <div class="service-grid">
+                <div class="service-card">
+                    <div class="service-icon">🛡️</div>
+                    <h3>安保巡逻</h3>
+                    <p>24小时安保值班，全天候监控覆盖</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🚿</div>
+                    <h3>水电维修</h3>
+                    <p>快速响应，专业维修团队上门服务</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🚬</div>
+                    <h3>垃圾分类</h3>
+                    <p>智能分类投放点，绿色环保引导</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🚗</div>
+                    <h3>车辆管理</h3>
+                    <p>智能道闸系统，规范停车秩序</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🌳</div>
+                    <h3>绿化养护</h3>
+                    <p>专业园林团队，四季常青环境优美</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🤝</div>
+                    <h3>邻里互助</h3>
+                    <p>建立互助小组，增进邻里情谊</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- News Section -->
+        <section id="news">
+            <div class="section-title">
+                <span>社区公告</span>
+                <a href="#" class="section-more">进入社区论坛 &gt;</a>
+            </div>
+            <div class="news-list">
+                <article class="news-item">
+                    <div class="news-date">
+                        <span class="day">15</span>
+                        <span class="month">10月</span>
+                    </div>
+                    <div class="news-content">
+                        <h4><a href="#">关于社区内禁止高空抛物的温馨提示</a></h4>
+                        <p>为了维护全体业主的生命财产安全，营造安全的居住环境，物业服务中心特此提醒各位业主...</p>
+                    </div>
+                </article>
+                <article class="news-item">
+                    <div class="news-date">
+                        <span class="day">12</span>
+                        <span class="month">10月</span>
+                    </div>
+                    <div class="news-content">
+                        <h4><a href="#">新绿苑社区秋季草坪修剪与施肥通知</a></h4>
+                        <p>为了提升社区绿化景观效果，物业工程部定于本周五对中心广场及各楼栋周边草坪进行修剪...</p>
+                    </div>
+                </article>
+                <article class="news-item">
+                    <div class="news-date">
+                        <span class="day">08</span>
+                        <span class="month">10月</span>
+                    </div>
+                    <div class="news-content">
+                        <h4><a href="#">关于开展“书香新绿苑”图书漂流活动的通知</a></h4>
+                        <p>为丰富业主精神文化生活，社区将举办图书漂流活动，欢迎各位居民踊跃参与...</p>
+                    </div>
+                </article>
+                <article class="news-item">
+                    <div class="news-date">
+                        <span class="day">01</span>
+                        <span class="month">10月</span>
+                    </div>
+                    <div class="news-content">
+                        <h4><a href="#">2023年第四季度物业费缴纳温馨提示</a></h4>
+                        <p>尊敬的业主，感谢您一直以来对物业工作的支持。2023年第四季度物业费缴纳工作现已开始...</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section id="gallery">
+            <div class="section-title">
+                <span>社区风采</span>
+                <a href="#" class="section-more">查看相册 &gt;</a>
+            </div>
+            <div class="gallery-grid">
+                <div class="gallery-item"><img src="https://picsum.photos/seed/garden1/300/300" alt="社区花园"></div>
+                <div class="gallery-item"><img src="https://picsum.photos/seed/activity1/300/300" alt="社区活动"></div>
+                <div class="gallery-item"><img src="https://picsum.photos/seed/building1/300/300" alt="楼栋外观"></div>
+                <div class="gallery-item"><img src="https://picsum.photos/seed/park1/300/300" alt="休闲公园"></div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Right Sidebar -->
+    <aside class="sidebar">
+        <!-- Contact Widget -->
+        <div class="widget" id="contact">
+            <div class="section-title" style="font-size: 18px; margin-bottom: 15px; border:none;">联系我们</div>
+            <ul class="contact-list">
+                <li>
+                    <span class="contact-icon">📞</span>
+                    <span>物业服务中心：021-12345678</span>
+                </li>
+                <li>
+                    <span class="contact-icon">📍</span>
+                    <span>地址：新绿苑小区1号门物业大厅</span>
+                </li>
+                <li>
+                    <span class="contact-icon">⏰</span>
+                    <span>服务时间：8:00 - 20:00</span>
+                </li>
+                <li>
+                    <span class="contact-icon">📧</span>
+                    <span>邮箱：service@xinlvyuan.com</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Notice Widget -->
+        <div class="widget">
+            <div class="section-title" style="font-size: 18px; margin-bottom: 15px; border:none;">紧急通知</div>
+            <div class="notice-board">
+                <h4>📢 最新动态</h4>
+                <ul>
+                    <li>关于下周停电检修的通知</li>
+                    <li>社区消防演习安排</li>
+                    <li>冬季供暖试水提醒</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="widget">
+            <div class="section-title" style="font-size: 18px; margin-bottom: 15px; border:none;">常用入口</div>
+            <ul class="footer-links">
+                <li><a href="#">电子缴费</a></li>
+                <li><a href="#">访客预约</a></li>
+                <li><a href="#">房屋租售</a></li>
+                <li><a href="#">意见反馈</a></li>
+            </ul>
+        </div>
+    </aside>
+</main>
+
+<footer>
+    <div class="footer-grid">
+        <div class="footer-col">
+            <h4>新绿苑社区</h4>
+            <p>致力于为业主提供高品质的居住环境与贴心服务，构建和谐美好的邻里家园。</p>
+        </div>
+        <div class="footer-col">
+            <h4>快速导航</h4>
+            <ul class="footer-links">
+                <li><a href="#">物业服务</a></li>
+                <li><a href="#">社区公告</a></li>
+                <li><a href="#">业主论坛</a></li>
+                <li><a href="#">便民服务</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>联系方式</h4>
+            <ul class="footer-links">
+                <li>服务热线：021-12345678</li>
+                <li>工作时间：周一至周日 8:00-20:00</li>
+                <li>地址：新绿苑社区服务中心</li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2023 新绿苑物业服务中心 版权所有 | 沪ICP备XXXXXXXX号</p>
+    </div>
+</footer>
+
+<script>
+    // Mobile Menu Toggle
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const nav = document.getElementById('main-nav');
+
+    menuBtn.addEventListener('click', () => {
+        nav.classList.toggle('active');
+        menuBtn.textContent = nav.classList.contains('active') ? '✕' : '☰';
+    });
+
+    // Close mobile menu when clicking a link
+    document.querySelectorAll('nav a').forEach(link => {
+        link.addEventListener('click', () => {
+            nav.classList.remove('active');
+            menuBtn.textContent = '☰';
+        });
+    });
+
+    // Simple interaction for buttons
+    function openLogin() {
+        // In a real scenario, this would open a modal or redirect
+        console.log("Opening login page...");
+    }
+
+    function openReport() {
+        // In a real scenario, this would open a repair ticket form
+        console.log("Opening repair report form...");
+    }
+</script>
+
+</body>
+          </html>

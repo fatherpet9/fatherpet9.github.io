@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="花都djkk官网 - 专注于花都地区DJ文化、现场音乐演出资讯及音乐资源分享。提供最新派对活动预告、DJ排行榜及专业的音乐播放服务。">
+    <meta name="keywords" content="花都djkk, 花都DJ, DJKK, 派对音乐, 夜店资讯, 电子音乐">
+    <title>花都djkk - 花都地区DJ文化与现场音乐资讯平台</title>
+    <script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+    <style>
+        :root {
+            --primary-color: #6a0dad;
+            --secondary-color: #ff00de;
+            --bg-dark: #0a0a12;
+            --bg-card: #161625;
+            --text-main: #ffffff;
+            --text-muted: #a0a0b0;
+            --accent: #00f2ff;
+            --font-stack: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-stack);
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.3s ease;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(10, 10, 18, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            background: linear-gradient(90deg, var(--accent), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--accent);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: radial-gradient(circle at center, rgba(106, 13, 173, 0.4) 0%, rgba(10, 10, 18, 0.9) 70%);
+            position: relative;
+            overflow: hidden;
+            padding: 0 2rem;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 20px rgba(0, 242, 255, 0.5);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-radius: 50px;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(106, 13, 173, 0.4);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 0, 222, 0.5);
+        }
+
+        .visual-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="40" stroke="rgba(255,255,255,0.03)" stroke-width="1" fill="none"/></svg>');
+            z-index: 1;
+            animation: bgMove 20s linear infinite;
+        }
+
+        /* Main Content */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        section {
+            margin-bottom: 5rem;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            margin-bottom: 2rem;
+            border-left: 4px solid var(--secondary-color);
+            padding-left: 1rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .section-subtitle {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Featured Grid */
+        .grid-layout {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0, 242, 255, 0.3);
+        }
+
+        .card-image {
+            height: 200px;
+            background: #2a2a35;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .card:hover .card-image img {
+            transform: scale(1.05);
+        }
+
+        .card-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            color: var(--accent);
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-main);
+        }
+
+        .card-meta {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .card-desc {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .card-action {
+            margin-top: auto;
+            text-align: right;
+        }
+
+        .link-text {
+            color: var(--accent);
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        /* Event List */
+        .event-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .event-item {
+            display: flex;
+            background: var(--bg-card);
+            padding: 1.5rem;
+            border-radius: 8px;
+            align-items: center;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: background 0.2s;
+        }
+
+        .event-item:hover {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .event-date {
+            background: rgba(106, 13, 173, 0.2);
+            color: var(--accent);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            text-align: center;
+            min-width: 80px;
+            margin-right: 1.5rem;
+        }
+
+        .event-date .day {
+            display: block;
+            font-size: 1.5rem;
+            font-weight: bold;
+            line-height: 1;
+        }
+
+        .event-info {
+            flex-grow: 1;
+        }
+
+        .event-info h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .event-info p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .event-location {
+            color: var(--secondary-color);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* Audio Player */
+        .player-container {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border-radius: 16px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .player-cover {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin-bottom: 1.5rem;
+            background: #000;
+            box-shadow: 0 0 30px rgba(106, 13, 173, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        .player-controls {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .control-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+
+        .control-btn:hover {
+            background: var(--primary-color);
+        }
+
+        .control-btn.play {
+            width: 60px;
+            height: 60px;
+            background: var(--accent);
+            color: #000;
+        }
+
+        .control-btn.play:hover {
+            background: #00c4cf;
+        }
+
+        .player-info h3 {
+            margin-bottom: 0.3rem;
+        }
+
+        .player-info span {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        footer {
+            background: #050508;
+            padding: 4rem 2rem 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-col h4 {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-col ul li a {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--secondary-color);
+        }
+
+        .copyright {
+            text-align: center;
+            color: #555;
+            font-size: 0.85rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes bgMove {
+            from { background-position: 0 0; }
+            to { background-position: 100px 100px; }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .nav-container { padding: 1rem; }
+            nav ul { display: none; } /* Simplified for single file */
+            .mobile-menu-btn { display: block; }
+            .section-header { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+            .event-item { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+            .event-date { margin-right: 0; margin-bottom: 0.5rem; }
+            .event-location { margin-top: 0.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo">DJKK.FM</a>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active">首页</a></li>
+                    <li><a href="#events">演出预告</a></li>
+                    <li><a href="#music">精选音乐</a></li>
+                    <li><a href="#about">关于DJKK</a></li>
+                </ul>
+            </nav>
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="visual-bg"></div>
+        <div class="hero-content">
+            <h1>花都djkk</h1>
+            <p>探索花都最前沿的电子音乐现场，体验DJKK带来的极致音浪与视听盛宴。</p>
+            <a href="#events" class="btn">查看演出日程</a>
+        </div>
+    </section>
+
+    <main>
+        <!-- Live Music Section -->
+        <section id="music">
+            <div class="section-header">
+                <div>
+                    <h2 class="section-title">最新混音作品</h2>
+                    <p class="section-subtitle">DJKK 本周最新发布的Remix与Originals</p>
+                </div>
+            </div>
+            
+            <div class="grid-layout">
+                <article class="card">
+                    <div class="card-image">
+                        <span class="card-badge">NEW</span>
+                        <img src="https://picsum.photos/seed/dj1/400/300" alt="音乐封面">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Neon Nights (Remix)</h3>
+                        <div class="card-meta">
+                            <span>House</span>
+                            <span>•</span>
+                            <span>3:45</span>
+                        </div>
+                        <p class="card-desc">为花都夜店现场量身打造的Deep House版本，节奏感强烈，氛围感十足。</p>
+                        <div class="card-action">
+                            <a href="#" class="link-text">播放试听 ↗</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <div class="card-image">
+                        <span class="card-badge">HOT</span>
+                        <img src="https://picsum.photos/seed/dj2/400/300" alt="音乐封面">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Cyberpunk City</h3>
+                        <div class="card-meta">
+                            <span>Techno</span>
+                            <span>•</span>
+                            <span>5:12</span>
+                        </div>
+                        <p class="card-desc">充满未来感的Techno曲目，带你穿梭于虚拟与现实之间的舞池。</p>
+                        <div class="card-action">
+                            <a href="#" class="link-text">播放试听 ↗</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <div class="card-image">
+                        <img src="https://picsum.photos/seed/dj3/400/300" alt="音乐封面">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Midnight Drive</h3>
+                        <div class="card-meta">
+                            <span>Progressive</span>
+                            <span>•</span>
+                            <span>4:20</span>
+                        </div>
+                        <p class="card-desc">Progressive House风格，旋律优美，适合作为开场或过渡曲目。</p>
+                        <div class="card-action">
+                            <a href="#" class="link-text">播放试听 ↗</a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Events Section -->
+        <section id="events">
+            <div class="section-header">
+                <div>
+                    <h2 class="section-title">近期演出预告</h2>
+                    <p class="section-subtitle">锁定花都DJKK的现场排期，不错过任何一场狂欢</p>
+                </div>
+                <a href="#" class="link-text">查看全部日程</a>
+            </div>
+
+            <div class="event-list">
+                <div class="event-item">
+                    <div class="event-date">
+                        <span class="day">15</span>
+                        <span class="month">OCT</span>
+                    </div>
+                    <div class="event-info">
+                        <h3>花都电音节 - 秋季特别场</h3>
+                        <p>地点：花都体育馆</p>
+                    </div>
+                    <div class="event-location">📍 花都体育馆</div>
+                </div>
+
+                <div class="event-item">
+                    <div class="event-date">
+                        <span class="day">22</span>
+                        <span class="month">OCT</span>
+                    </div>
+                    <div class="event-info">
+                        <h3>DJKK x 派对猫 混合双打</h3>
+                        <p>地点：The Void Club</p>
+                    </div>
+                    <div class="event-location">📍 The Void Club</div>
+                </div>
+
+                <div class="event-item">
+                    <div class="event-date">
+                        <span class="day">05</span>
+                        <span class="month">NOV</span>
+                    </div>
+                    <div class="event-info">
+                        <h3>周末狂欢夜 - Bass Drop专场</h3>
+                        <p>地点：Blue Note Club</p>
+                    </div>
+                    <div class="event-location">📍 Blue Note Club</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Player -->
+        <section>
+            <div class="section-header">
+                <h2 class="section-title">实时直播</h2>
+            </div>
+            <div class="player-container">
+                <div class="player-cover">🎧</div>
+                <div class="player-controls">
+                    <button class="control-btn">⏮</button>
+                    <button class="control-btn play">▶</button>
+                    <button class="control-btn">⏭</button>
+                </div>
+                <div class="player-info">
+                    <h3>正在直播</h3>
+                    <span>花都djkk - 周末精选</span>
+                </div>
+                <div style="width: 100%; margin-top: 1.5rem; background: rgba(255,255,255,0.1); height: 4px; border-radius: 2px;">
+                    <div style="width: 45%; background: var(--secondary-color); height: 100%; border-radius: 2px;"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about">
+            <div class="section-header">
+                <h2 class="section-title">关于 DJKK</h2>
+            </div>
+            <article style="background: var(--bg-card); padding: 2rem; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.05);">
+                <p style="margin-bottom: 1rem; color: var(--text-muted);">
+                    <strong>花都djkk</strong> 是活跃于花都地区最具影响力的电子音乐DJ与音乐制作人。致力于将最新的全球电子音乐趋势带给本地听众，打造高品质的现场演出体验。我们相信音乐是连接人心的桥梁，无论是在夜店、音乐节还是私人派对中，DJKK 都力求通过每一个音符触动灵魂。
+                </p>
+                <p style="color: var(--text-muted);">
+                    专注于House、Techno和Progressive House风格，DJKK 擅长营造沉浸式的听觉环境，是花都夜生活文化的重要推动者。
+                </p>
+            </article>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-col">
+                <a href="#" class="logo" style="display: block; margin-bottom: 1rem;">DJKK.FM</a>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">
+                    花都地区最专业的电子音乐资讯与现场服务平台。探索声音的无限可能。
+                </p>
+            </div>
+            <div class="footer-col">
+                <h4>快速链接</h4>
+                <ul>
+                    <li><a href="#">首页</a></li>
+                    <li><a href="#events">演出门票</a></li>
+                    <li><a href="#music">音乐下载</a></li>
+                    <li><a href="#">联系合作</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>关注我们</h4>
+                <ul>
+                    <li><a href="#">新浪微博</a></li>
+                    <li><a href="#">网易云音乐</a></li>
+                    <li><a href="#">微信公众号</a></li>
+                    <li><a href="#">抖音账号</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>联系方式</h4>
+                <ul>
+                    <li><a href="#">商务合作</a></li>
+                    <li><a href="#">演出咨询</a></li>
+                    <li><a href="#">投稿建议</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2023 花都djkk 版权所有. All Rights Reserved.
+        </div>
+    </footer>
+
+    <script>
+        // Simple interaction for the player
+        const playBtn = document.querySelector('.play');
+        let isPlaying = false;
+
+        playBtn.addEventListener('click', () => {
+            isPlaying = !isPlaying;
+            if (isPlaying) {
+                playBtn.innerHTML = '⏸';
+                playBtn.style.background = '#ff00de';
+                playBtn.style.color = '#fff';
+            } else {
+                playBtn.innerHTML = '▶';
+                playBtn.style.background = 'var(--accent)';
+                playBtn.style.color = '#000';
+            }
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
